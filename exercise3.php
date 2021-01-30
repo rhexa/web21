@@ -83,7 +83,37 @@
             
             <!-- answer -->
             <div class="answer">Answer</div>
-            <p></p>
+            <?php
+                $score = 0;
+                if (isset($score) && !empty($score)) {
+                    switch($score){
+                        case ($score>=80 && $score<=100):
+                            echo "Excellent";
+                            break;
+                        case ($score>=70 && $score<80):
+                            echo "Great";
+                            break;
+                        case ($score>=60 && $score<70):
+                            echo "Good";
+                            break;
+                        case ($score>=50 && $score<60):
+                            echo "Pass";
+                            break;
+                        case ($score>=0 && $score<50):
+                            echo "Fail";
+                            break;
+                        default:
+                            echo "Score has to be between 0 - 100";
+                            break;
+                    }
+                }
+                else {
+                    echo "Score is 0";
+                }
+
+                
+
+            ?>
         </article>
 
         <!-- 4 -->
