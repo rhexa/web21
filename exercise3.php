@@ -109,10 +109,7 @@
                 }
                 else {
                     echo "Score is 0";
-                }
-
-                
-
+                }              
             ?>
         </article>
 
@@ -128,19 +125,56 @@
         <!-- 5 -->
         <article>
             <h2>5. Use a looping statement to construct the following pattern: </h2>
+                12345678 <br>
+                1234567 <br>
+                123456 <br>
+                12345 <br>
+                1234 <br>
+                123 <br>
+                12 <br>
+                1
        
             <!-- answer -->
             <div class="answer">Answer</div>
-            <p></p>
+                <?php
+                    for ($i=8; $i > 0; $i--) { 
+                        for ($j=1; $j < $i+1 ; $j++) { 
+                            echo $j;
+                        }
+                        echo "<br>";
+                    }
+                ?>
         </article>
 
         <!-- 6 -->
         <article>
             <h2>6. Use While loop to print the following pattern: </h2>
             
+                * <br>
+                ** <br>
+                *** <br>
+                **** <br>
+                ***** <br>
+                ****** <br>
+                ******* <br>
+                ********
+            
             <!-- answer -->
             <div class="answer">Answer</div>
-            <p></p>
+            <?php
+                $a = $b = 0;
+
+                while ($a < 8) {
+                    while ($b < $a+1) {
+                        echo "*";
+                        $b++;
+                    }
+                    echo "<br>";
+                    $a++;
+                    $b=0;
+                }
+            ?>
+
         </article>
 
         <!-- 7 -->
