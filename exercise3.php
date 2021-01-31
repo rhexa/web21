@@ -33,6 +33,26 @@
         }
     </style>
 
+    <!-- PHP handling -->
+    <?php
+        /* $score = $pre_score = ""; */
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            $pre_score = test_input($_POST["score"]);
+            if (is_numeric($pre_score)) {
+                $score = $pre_score;
+            }
+        }
+
+        // Validation
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+          }
+    ?>
+
     <title>Exercise 3</title>
 </head>
 <body>
@@ -83,8 +103,12 @@
             
             <!-- answer -->
             <div class="answer">Answer</div>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <input type="text" id="score" name="score" value="Type 0 - 100">
+                    <input type="submit" value="Calculate">    
+                </form>
             <?php
-                $score = 0;
+                
                 if (isset($score) && !empty($score)) {
                     switch($score){
                         case ($score>=80 && $score<=100):
@@ -107,9 +131,12 @@
                             break;
                     }
                 }
-                else {
+                elseif (isset($score) && empty($score)) {
                     echo "Score is 0";
-                }              
+                }
+                else {
+                    echo "Insert the score";
+                }
             ?>
         </article>
 
@@ -119,7 +146,7 @@
             
             <!-- answer -->
             <div class="answer">Answer</div>
-            <p></p>
+                
         </article>
 
         <!-- 5 -->
