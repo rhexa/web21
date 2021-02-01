@@ -35,15 +35,6 @@
 
     <!-- PHP handling -->
     <?php
-        /* $score = $pre_score = ""; */
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $pre_score = test_input($_POST["score"]);
-            if (is_numeric($pre_score)) {
-                $score = $pre_score;
-            }
-        }
-
         // Validation
         function test_input($data) {
             $data = trim($data);
@@ -103,41 +94,53 @@
             
             <!-- answer -->
             <div class="answer">Answer</div>
+                <!-- PHP Form Handling -->
+                <?php 
+                    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                        $pre_score = test_input($_POST["score"]);
+                        if (is_numeric($pre_score)) {
+                            $score = $pre_score;
+                        }
+                    }
+                ?>
+
+                <!-- Form -->
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <input type="text" id="score" name="score" value="Type 0 - 100">
                     <input type="submit" value="Calculate">    
                 </form>
-            <?php
-                
-                if (isset($score) && !empty($score)) {
-                    switch($score){
-                        case ($score>=80 && $score<=100):
-                            echo "Excellent";
-                            break;
-                        case ($score>=70 && $score<80):
-                            echo "Great";
-                            break;
-                        case ($score>=60 && $score<70):
-                            echo "Good";
-                            break;
-                        case ($score>=50 && $score<60):
-                            echo "Pass";
-                            break;
-                        case ($score>=0 && $score<50):
-                            echo "Fail";
-                            break;
-                        default:
-                            echo "Score has to be between 0 - 100";
-                            break;
+
+                <!-- PHP processing -->
+                <?php
+                    if (isset($score) && !empty($score)) {
+                        switch($score){
+                            case ($score>=80 && $score<=100):
+                                echo "Excellent";
+                                break;
+                            case ($score>=70 && $score<80):
+                                echo "Great";
+                                break;
+                            case ($score>=60 && $score<70):
+                                echo "Good";
+                                break;
+                            case ($score>=50 && $score<60):
+                                echo "Pass";
+                                break;
+                            case ($score>=0 && $score<50):
+                                echo "Fail";
+                                break;
+                            default:
+                                echo "Score has to be between 0 - 100";
+                                break;
+                        }
                     }
-                }
-                elseif (isset($score) && empty($score)) {
-                    echo "Score is 0";
-                }
-                else {
-                    echo "Insert the score";
-                }
-            ?>
+                    elseif (isset($score) && empty($score)) {
+                        echo "Score is 0";
+                    }
+                    else {
+                        echo "Insert the score";
+                    }
+                ?>
         </article>
 
         <!-- 4 -->
@@ -146,6 +149,58 @@
             
             <!-- answer -->
             <div class="answer">Answer</div>
+            <!-- php handling -->
+            <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                    $name = test_input($_POST["name"]);
+                    $pre_age = test_input($_POST["age"]);
+
+                    // name validation
+                    if (!empty($name)){
+                        $question4greet = "Hi " . $name . "!";
+                    }
+                    
+                    // age validation
+                    if (is_numeric($pre_age)) {
+                        $age = $pre_age;
+                    }
+
+                    if (isset($age) && !empty($age)){
+                        if ($age < 18){
+                            $question4error = "You are " . $age . " years old. You are not eligible for voting";
+                        }   
+                        else {
+                            $question4error = "You are " . $age . " years old. You are eligible for voting";
+                        }
+                    }
+                    elseif (isset($age) && empty($age)) {
+                        $question4error = "You are " . $age . " years old. You are not eligible for voting";
+                    }
+                    else {
+                        $question4error = "";
+                    }
+                }
+            ?>
+
+            <!-- form -->
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <table>
+                    <tr>
+                        <td><label for="name">Name: </label></td>
+                        <td><input type="text" name="name" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="age">Age: </label></td>
+                        <td><input type="number" name="age" id="age" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Calculate"></td>
+                    </tr>
+                </table>
+            </form>
+            <p style="text-align: center;"><?php
+            echo "<strong>" . $question4greet . "</strong><br>";
+            echo $question4error; ?></p>
                 
         </article>
 
