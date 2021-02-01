@@ -8,9 +8,9 @@
 <body>
     
     <form action="input.php" method="post">
-        <label for="fname">First Name:</label> <input type="text" name="fname" id="fname">
-        <label for="lname">Last Name:</label> <input type="text" name="lname" id="lname">
-        <label for="city">City:</label> <input type="text" name="city" id="city">
+        <label for="fname">First Name:</label> <input type="text" name="fname" id="fname"> <br>
+        <label for="lname">Last Name:</label> <input type="text" name="lname" id="lname"> <br>
+        <label for="city">City:</label> <input type="text" name="city" id="city"> <br>
         <label for="groupid">Group ID</label>
         <select name="groupid" id="groupid">
             <option value="bbcap19">BBCAP 2019</option>
