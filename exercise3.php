@@ -271,6 +271,15 @@
             <a href="https://github.com/rhexa/web21" target="_blank" rel="noopener noreferrer">My GitHub Repo</a> <br>
             <a href="https://rhexa.github.io/web21/" target="_blank" rel="noopener noreferrer">My GitHub Pages</a>
         </article>
+
+        <!-- 8 -->
+        <article>
+            <h2>8. Give  1 or 0 point for the clarity of the task (User interface). </h2>
+           
+            <!-- answer -->
+            <div class="answer">Answer</div>
+            <p>I was a bit wondering about this instruction. But, in case it meant that i needed to make my work looks tidy and easy to be understood, i did try to make it easy to be read by putting comments on the script also styled the user interface somehow so the user will not get confused with the contents.</p>
+        </article>
     </div>
 
 
