@@ -155,10 +155,6 @@
 
         echo "</article>";
 
-
-
-
-
         /* 
         4. Change the following array's all values to upper case.
         $courses4=array("php", "html", "javascript", "cms", "project");
