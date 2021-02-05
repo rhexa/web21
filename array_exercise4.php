@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise 4</title>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rhexa/jsScripts@main/min.js" integrity="sha384-zLtQi8yHwYID65JvTIlHNyB+oMT44a4JWQdR8ZD8NuceKWcJAa5ueTZrjefWEyLq" crossorigin="anonymous"></script> -->
+
     <style>
         .container {
             margin-bottom: 100px;
@@ -29,6 +31,13 @@
             margin-bottom: 0;
 
         }
+        div.answer:hover {
+            background-color: #f0f8ff;
+            cursor: pointer;
+        }
+        div.answer-container {
+            display: none;
+        }
         p {
             font-size: 18px;
             margin: 0;
@@ -37,28 +46,81 @@
 </head>
 <body>
     <div class="container"> 
+        <script>
+            var accordion = [];
+            var a;
+
+            function hideCollapse(elementId, collapse) {
+                if (accordion.length == 0) {
+                    console.log("added " + elementId);
+                    if (collapse == true) {
+                        document.getElementById(elementId).style.display="none";
+                        accordion.push([elementId, false]);
+                    }
+                    else {
+                        document.getElementById(elementId).style.display="inline";
+                        accordion.push([elementId, true]);
+                    }
+                }
+                    
+                else {
+                    var i;
+                    var found = false;
+                    for (i=0; i<accordion.length; i++){
+                        if (accordion[i][0] == elementId) {
+                            console.log("ID Found");
+                            found = true;
+                            if (accordion[i][1] == true){
+                                document.getElementById(elementId).style.display="none";
+                                accordion[i][1]=false;
+                                break;
+                            }
+                            else {
+                                document.getElementById(elementId).style.display="inline";
+                                accordion[i][1]=true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!found){
+                        console.log("Not found " + elementId);
+                        if (collapse == true) {
+                            document.getElementById(elementId).style.display="none";
+                            accordion.push([elementId, false]);
+                        }
+                        else {
+                            document.getElementById(elementId).style.display="inline";
+                            accordion.push([elementId, true]);
+                        }
+                        found = false;
+                    }
+                }   
+            }
+        </script>
+        
         <?php
         // Answer separator
-        function divAnswer(){
-            echo '<div class="answer">Answer</div>';
+        function divAnswer($elementId){
+            echo '<div class="answer" onclick="hideCollapse(\'' . $elementId . '\', \'false\')">Answer</div>';
         }
 
         /*
         1. Write a php script to display courses as list. Use <li>
         $courses=array("PHP", "HTML", "JavaScript", "CMS", "Project")
         */
-        function question1(){
+        echo "<article>";
             echo "<h2>1. Write a php script to display courses as list.</h2>";
             
             // answer
-            divAnswer();
+            divAnswer(a1);
 
+            echo '<div class="answer-container" id="a1">';
             $courses=array("PHP", "HTML", "JavaScript", "CMS", "Project");
             foreach ($courses as $course) {
                 echo "<li>$course</li>";
             }
-        }
-        echo "<article>" . question1() . "</article>";
+            echo '</div>';
+        echo "</article>";
         
 
         /* 2. The unset() function is used to remove element from the array.
@@ -68,7 +130,8 @@
         Delete an element from the array below:
         $courses1=array("PHP", "HTML", "JavaScript", "CMS", "Project");
         */
-        function question2(){
+
+        echo "<article>";
             echo '<h2>2. The unset() function is used to remove element from the array. <br>
             The var_dump() function is used to dump information about a variable. <br>
             array_values() is an inbuilt function that
@@ -82,23 +145,24 @@
             }
 
             // answer
-            divAnswer();
+            divAnswer(a2);
 
-            echo "<b>echo var_dump() returns: </b><br>";
-            echo var_dump($courses1);
-            echo "<br><br>";
+            echo '<div class="answer-container" id="a2">';
+                echo "<b>echo var_dump() returns: </b><br>";
+                echo var_dump($courses1);
+                echo "<br><br>";
 
-            echo "<b>print_r(array_values()) returns: </b><br>";
-            print_r(array_values($courses1));
-            echo "<br><br>";
-            
-            echo "<b>print array after unset() returns nothing</b><br>";
-            unset($courses1);
-            foreach ($courses1 as $course) {
-                echo $course . "<br>";
-            }
-        }
-        echo "<article>" . question2() . "</article>";
+                echo "<b>print_r(array_values()) returns: </b><br>";
+                print_r(array_values($courses1));
+                echo "<br><br>";
+                
+                echo "<b>print array after unset() returns nothing</b><br>";
+                unset($courses1);
+                foreach ($courses1 as $course) {
+                    echo $course . "<br>";
+                }
+            echo '</div>';
+        echo "</article>";
 
         /* 
         3. Sort the following array 
@@ -114,69 +178,96 @@
             }
         }
         echo "<article>";
-        echo "<h2>3. Sort the following array</h2>";
-        echo '$courses3=array("PHP", "HTML", "JavaScript", "CMS", "Project");<br>
-                a) ascending order sort by value <br>
-                b) ascending order sort by Key <br>
-                c) descending order sort by Value <br>
-                d) descending order sort by Key';
-        
-        // answer
-        divAnswer();
-        echo "<b>The array provided is not an associative array. In case you really meant this exercise for associative array, i will modify the array to be associative one</b><br>";
-        echo '$courses3=array("PHP" => "7.3", "HTML" => "5", "JavaScript" => "ES6", "CMS" => "Joomla", "Project" => "Web Development");';
-        $courses3=array("PHP" => "7.3", "HTML" => "5", "JavaScript" => "ES6", "CMS" => "Joomla", "Project" => "Web Development");
+            echo "<h2>3. Sort the following array</h2>";
+            echo '$courses3=array("PHP", "HTML", "JavaScript", "CMS", "Project");<br>
+                    a) ascending order sort by value <br>
+                    b) ascending order sort by Key <br>
+                    c) descending order sort by Value <br>
+                    d) descending order sort by Key';
+            
+            // answer
+            divAnswer(a3);
 
-        // A.
-        echo "<br><br>";
-        echo "<b>a) ascending order sort by value</b> <br>";
-        asort($courses3);
-        q3print($courses3);
+            echo '<div class="answer-container" id="a3">';
+                echo "<b>The array provided is not an associative array. In case you really meant this exercise for associative array, i will modify the array to be associative one</b><br>";
+                echo '$courses3=array("PHP" => "7.3", "HTML" => "5", "JavaScript" => "ES6", "CMS" => "Joomla", "Project" => "Web Development");';
+                $courses3=array("PHP" => "7.3", "HTML" => "5", "JavaScript" => "ES6", "CMS" => "Joomla", "Project" => "Web Development");
 
-        // B.
-        echo "<br>";
-        echo "<b>b) ascending order sort by Key </b><br>";
-        ksort($courses3);
-        q3print($courses3);
+                // A.
+                echo "<br><br>";
+                echo "<b>a) ascending order sort by value</b> <br>";
+                asort($courses3);
+                q3print($courses3);
 
-        // C.
-        echo "<br>";
-        echo "<b>c) descending order sort by Value</b><br>";
-        arsort($courses3);
-        q3print($courses3);
+                // B.
+                echo "<br>";
+                echo "<b>b) ascending order sort by Key </b><br>";
+                ksort($courses3);
+                q3print($courses3);
 
-        echo "</article>";
+                // C.
+                echo "<br>";
+                echo "<b>c) descending order sort by Value</b><br>";
+                arsort($courses3);
+                q3print($courses3);
 
-        // D.
-        echo "<br>";
-        echo "<b>d) descending order sort by Key</b><br>";
-        krsort($courses3);
-        q3print($courses3);
-
+                // D.
+                echo "<br>";
+                echo "<b>d) descending order sort by Key</b><br>";
+                krsort($courses3);
+                q3print($courses3);
+            echo '</div>';
         echo "</article>";
 
         /* 
         4. Change the following array's all values to upper case.
         $courses4=array("php", "html", "javascript", "cms", "project");
         */
-
-
+        echo "<article>";
+            echo "<h2>4. Change the following array's all values to upper case.</h2>";
+            echo '$courses4=array("php", "html", "javascript", "cms", "project");';
+            divAnswer(a4);
+            echo '<div class="answer-container" id="a4">';
+            
+            echo '</div>';
+        echo "</article>";
 
 
 
 
         // 5. Create an array that holds your favorite colors and print them. (indexed arrays)
+        echo "<article>";
+            echo "<h2>3. Sort the following array</h2>";
 
+            divAnswer(a4);
+            echo '<div class="answer-container" id="a4">';
+            
+            echo '</div>';
+        echo "</article>";
 
 
 
         // 6. List all your favorite colors and their hexadecimal equivalents. (associative arrays)
+        echo "<article>";
+            echo "<h2>3. Sort the following array</h2>";
 
+            divAnswer(a4);
+            echo '<div class="answer-container" id="a4">';
+            
+            echo '</div>';
+        echo "</article>";
 
 
 
         // 7. Include 12 months in an array named month and print them using loop statement.
+        echo "<article>";
+            echo "<h2>3. Sort the following array</h2>";
 
+            divAnswer(a4);
+            echo '<div class="answer-container" id="a4">';
+            
+            echo '</div>';
+        echo "</article>";
 
 
 
