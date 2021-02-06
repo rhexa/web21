@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise 4</title>
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rhexa/jsScripts@main/min.js" integrity="sha384-zLtQi8yHwYID65JvTIlHNyB+oMT44a4JWQdR8ZD8NuceKWcJAa5ueTZrjefWEyLq" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/rhexa/jsScripts@main/min1.js" integrity="sha384-wQHa6D7o2s/I9umauuw17ZVy62XMN6czo9UNCAPY8KWDUynD+k69q6bP87//Cn7z" crossorigin="anonymous"></script>
 
     <style>
         .container {
@@ -35,9 +35,12 @@
             background-color: #f0f8ff;
             cursor: pointer;
         }
-        div.answer-container {
+        div#a3 {
             display: none;
         }
+        /* div.answer-container {
+            display: none;
+        } */
         p {
             font-size: 18px;
             margin: 0;
@@ -45,63 +48,16 @@
     </style>
 </head>
 <body>
-    <div class="container"> 
-        <script>
-            var accordion = [];
-            var a;
-
-            function hideCollapse(elementId, collapse) {
-                if (accordion.length == 0) {
-                    console.log("added " + elementId);
-                    if (collapse == true) {
-                        document.getElementById(elementId).style.display="none";
-                        accordion.push([elementId, false]);
-                    }
-                    else {
-                        document.getElementById(elementId).style.display="inline";
-                        accordion.push([elementId, true]);
-                    }
-                }
-                    
-                else {
-                    var i;
-                    var found = false;
-                    for (i=0; i<accordion.length; i++){
-                        if (accordion[i][0] == elementId) {
-                            console.log("ID Found");
-                            found = true;
-                            if (accordion[i][1] == true){
-                                document.getElementById(elementId).style.display="none";
-                                accordion[i][1]=false;
-                                break;
-                            }
-                            else {
-                                document.getElementById(elementId).style.display="inline";
-                                accordion[i][1]=true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!found){
-                        console.log("Not found " + elementId);
-                        if (collapse == true) {
-                            document.getElementById(elementId).style.display="none";
-                            accordion.push([elementId, false]);
-                        }
-                        else {
-                            document.getElementById(elementId).style.display="inline";
-                            accordion.push([elementId, true]);
-                        }
-                        found = false;
-                    }
-                }   
-            }
-        </script>
+    <div class="container">
         
         <?php
         // Answer separator
-        function divAnswer($elementId){
-            echo '<div class="answer" onclick="hideCollapse(\'' . $elementId . '\', \'false\')">Answer</div>';
+        /* function divAnswer($elementId){
+            echo '<div class="answer" onclick="hideCollapse(\'' . $elementId . '\', true)">Answer</div>';
+        } */
+
+        function divAnswer($elementId, $collapse=true){
+            echo '<div class="answer" onclick="hideCollapse(\'' . $elementId . '\', ' . $collapse . ')">Answer</div>';
         }
 
         /*
@@ -186,7 +142,7 @@
                     d) descending order sort by Key';
             
             // answer
-            divAnswer(a3);
+            divAnswer(a3, false);
 
             echo '<div class="answer-container" id="a3">';
                 echo "<b>The array provided is not an associative array. In case you really meant this exercise for associative array, i will modify the array to be associative one</b><br>";
@@ -226,9 +182,15 @@
         echo "<article>";
             echo "<h2>4. Change the following array's all values to upper case.</h2>";
             echo '$courses4=array("php", "html", "javascript", "cms", "project");';
+
             divAnswer(a4);
             echo '<div class="answer-container" id="a4">';
-            
+            $courses4=array("php", "html", "javascript", "cms", "project");
+            foreach ($courses4 as $key => $value) {
+                $courses4[$key] = strtoupper($value);
+            }
+            print_r($courses4);
+
             echo '</div>';
         echo "</article>";
 
@@ -237,10 +199,10 @@
 
         // 5. Create an array that holds your favorite colors and print them. (indexed arrays)
         echo "<article>";
-            echo "<h2>3. Sort the following array</h2>";
+            echo "<h2>5. Create an array that holds your favorite colors and print them. (indexed arrays)</h2>";
 
-            divAnswer(a4);
-            echo '<div class="answer-container" id="a4">';
+            divAnswer(a5);
+            echo '<div class="answer-container" id="a5">';
             
             echo '</div>';
         echo "</article>";
@@ -249,10 +211,10 @@
 
         // 6. List all your favorite colors and their hexadecimal equivalents. (associative arrays)
         echo "<article>";
-            echo "<h2>3. Sort the following array</h2>";
+            echo "<h2>6. List all your favorite colors and their hexadecimal equivalents. (associative arrays)</h2>";
 
-            divAnswer(a4);
-            echo '<div class="answer-container" id="a4">';
+            divAnswer(a6);
+            echo '<div class="answer-container" id="a6">';
             
             echo '</div>';
         echo "</article>";
@@ -261,10 +223,10 @@
 
         // 7. Include 12 months in an array named month and print them using loop statement.
         echo "<article>";
-            echo "<h2>3. Sort the following array</h2>";
+            echo "<h2>7. Include 12 months in an array named month and print them using loop statement.</h2>";
 
-            divAnswer(a4);
-            echo '<div class="answer-container" id="a4">';
+            divAnswer(a7);
+            echo '<div class="answer-container" id="a7">';
             
             echo '</div>';
         echo "</article>";
