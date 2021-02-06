@@ -8,7 +8,7 @@
 
     <style>
         .container {
-            margin-bottom: 100px;
+            margin-bottom: 200px;
             width: 90%;
             margin: 0 auto;
         }
@@ -35,12 +35,12 @@
             background-color: #f0f8ff;
             cursor: pointer;
         }
-        div#a3 {
+        div.answer-container {
             display: none;
         }
-        /* div.answer-container {
-            display: none;
-        } */
+        div.collapse {
+            display: inline;
+        }
         p {
             font-size: 18px;
             margin: 0;
@@ -56,7 +56,7 @@
             echo '<div class="answer" onclick="hideCollapse(\'' . $elementId . '\', true)">Answer</div>';
         } */
 
-        function divAnswer($elementId, $collapse=true){
+        function divAnswer($elementId, $collapse=false){
             echo '<div class="answer" onclick="hideCollapse(\'' . $elementId . '\', ' . $collapse . ')">Answer</div>';
         }
 
@@ -185,17 +185,13 @@
 
             divAnswer(a4);
             echo '<div class="answer-container" id="a4">';
-            $courses4=array("php", "html", "javascript", "cms", "project");
-            foreach ($courses4 as $key => $value) {
-                $courses4[$key] = strtoupper($value);
-            }
-            print_r($courses4);
-
+                $courses4=array("php", "html", "javascript", "cms", "project");
+                foreach ($courses4 as $key => $value) {
+                    $courses4[$key] = strtoupper($value);
+                }
+                print_r($courses4);
             echo '</div>';
         echo "</article>";
-
-
-
 
         // 5. Create an array that holds your favorite colors and print them. (indexed arrays)
         echo "<article>";
@@ -203,11 +199,14 @@
 
             divAnswer(a5);
             echo '<div class="answer-container" id="a5">';
-            
+                echo '<b>$courses5 = array("OrangeRed", "Yellow", "Chartreuse", "Cyan", "Gold")</b><br><br>';
+                $courses5 = array("OrangeRed", "Yellow", "Chartreuse", "Cyan", "Gold");
+                echo '<b>print_r($courses5)</b><br>';
+                foreach ($courses5 as $color ) {
+                    echo "<li style=\"background-color: $color;\">$color</li>";
+                }
             echo '</div>';
         echo "</article>";
-
-
 
         // 6. List all your favorite colors and their hexadecimal equivalents. (associative arrays)
         echo "<article>";
@@ -215,11 +214,15 @@
 
             divAnswer(a6);
             echo '<div class="answer-container" id="a6">';
+            $courses6 = array("OrangeRed"=>"#FF4500", "Yellow"=>"#FFFF00", "Chartreuse"=>"#7FFF00", "Cyan"=>"#00FFFF", "Gold"=>"#FFD700");
+            echo "<table>";
+            foreach ($courses6 as $key => $value) {
+                echo "<tr style=\"background-color: $value;\"><td>$key</td><td>$value</td></tr>";
+            }
+            echo "</table>";
             
             echo '</div>';
         echo "</article>";
-
-
 
         // 7. Include 12 months in an array named month and print them using loop statement.
         echo "<article>";
@@ -227,11 +230,15 @@
 
             divAnswer(a7);
             echo '<div class="answer-container" id="a7">';
-            
+                $months = array();
+                for ($i=1; $i<=12; $i++){
+                    array_push($months, date("F", mktime(0, 0, 0, $i)));
+                }
+                foreach ($months as $month) {
+                    echo "$month <br>";
+                }
             echo '</div>';
         echo "</article>";
-
-
 
         /*
         8. PHP script to calculate and display average temperature, five lowest and highest temperatures.
@@ -244,10 +251,10 @@
         echo "<hr><h2> Calculation average temperature: </h2>";
         $month_temp = "78, 60, 62, 68, 71, 68, 73, 85, 66, 64, 76, 63, 81, 76, 73,
         68, 72, 73, 75, 65, 74, 63, 67, 65, 64, 68, 73, 75, 79, 73";
-        // what is explode and what does the below code do? : 
+        // what is explode and what does the below code do? : slice the text with defined delimiter which then be inserted to an array.
         $temp_array = explode(',', $month_temp);
         $tot_temp = 0;
-        // What is count?
+        // What is count? : count is a function to count objects or elements, in this case it is used to count the length of the array
         $temp_array_length = count($temp_array);
         foreach($temp_array as $temp)
         {
@@ -256,7 +263,7 @@
         $avg_high_temp = $tot_temp/$temp_array_length;
         echo "Average Temperature is : ".$avg_high_temp."
         "; 
-        // what does sort do?
+        // what does sort do? : as it describes, sort is a function to sort datas or objects or elements. In this case it is used to sort the elements of $temp_array in ascending alphabetical order 
         sort($temp_array);
         echo "<br> List of five lowest temperatures :";
         for ($i=0; $i< 5; $i++)
@@ -264,7 +271,7 @@
         echo $temp_array[$i].", ";
         }
         echo "<br>List of five highest temperatures :";
-        // explain the following loop
+        // explain the following loop : this loop is an iteration starting at 5 element from the last element in array iterating to the last element of the array. In simple word, it iterates the 5 last elements in the array 
         for ($i=($temp_array_length-5); $i< ($temp_array_length); $i++)
         {
         echo $temp_array[$i].", ";
@@ -272,7 +279,5 @@
         ?>
     </div>
     
-
-
 </body>
 </html>
